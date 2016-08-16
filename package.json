@@ -1,6 +1,7 @@
 {
   "name": "jquery-tokeninput",
   "version": "1.7.3",
+  "main": "src/jquery.tokeninput.js"
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.3",
