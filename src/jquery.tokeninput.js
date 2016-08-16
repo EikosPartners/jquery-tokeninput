@@ -287,7 +287,7 @@
                     case KEY.RIGHT:
                     case KEY.UP:
                     case KEY.DOWN:
-                        if(this.value.length === 0) {
+                        if(this.value.length === 0 && event.keyCode !== KEY.DOWN && event.keyCode !== KEY.UP) {
                             previous_token = input_token.prev();
                             next_token = input_token.next();
 
