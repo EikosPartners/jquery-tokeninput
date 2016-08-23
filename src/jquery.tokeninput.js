@@ -1,13 +1,15 @@
-/*
- * jQuery Plugin: Tokenizing Autocomplete Text Entry
- * Version 1.7.2
- *
- * Copyright (c) 2009 James Smith (http://loopj.com)
- * Licensed jointly under the GPL and MIT licenses,
- * choose which one suits your project best!
- *
- */
-;(function ($) {
+/* global window, document, define, jQuery, setInterval, clearInterval */
+(function(factory) {
+    'use strict';
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof exports !== 'undefined') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(jQuery);
+    }
+
+}(function($) {
     var DEFAULT_SETTINGS = {
         // Search settings
         method: "GET",
@@ -1110,5 +1112,4 @@
             return data[query];
         };
     };
-
-}(jQuery));
+}));
