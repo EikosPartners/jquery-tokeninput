@@ -68,6 +68,8 @@
         onFreeTaggingAdd: null,
         onDelete: null,
         onReady: null,
+        onDropdownChange: null,
+        onTokenSelected: null,
 
         // Other settings
         idPrefix: "token-input-",
@@ -265,7 +267,7 @@
                         do_search();
                     } else {
                         show_dropdown_hint();
-                    }                
+                    }
                 }
                 token_list.addClass($(input).data("settings").classes.focused);
             })
@@ -609,6 +611,11 @@
         // Inner function to a token to the list
         function insert_token(item) {
             var $this_token = $($(input).data("settings").tokenFormatter(item));
+
+            if (typeof($(input).data("settings").onTokenSelected) === "function") {
+                $(input).data("settings").onTokenSelected.call(this, $this_token);
+            }
+
             var readonly = item.readonly === true;
 
             if(readonly) $this_token.addClass($(input).data("settings").classes.tokenReadOnly);
@@ -921,6 +928,10 @@
 
                     $.data(this_li.get(0), "tokeninput", value);
                 });
+
+                if (typeof($(input).data("settings").onDropdownChange) === "function") {
+                    $(input).data("settings").onDropdownChange.call(this, dropdown_ul);
+                }
 
                 show_dropdown();
 
