@@ -968,6 +968,21 @@
                 item.addClass($(input).data("settings").classes.selectedDropdownItem);
                 selected_dropdown_item = item.get(0);
             }
+            // fix to force dropdown to scroll on down/up arrow if item isn't 
+            // visible due to overflow:hidden or scroll
+             if (selected_dropdown_item) {
+                var selectedTop = $(selected_dropdown_item).offset().top;
+                var selectedBottom = selectedTop + $(selected_dropdown_item).outerHeight();
+                var ddTop = $(dropdown).offset().top
+                var ddBottom = ddTop + $(dropdown).outerHeight();
+                var ddScrollTop = $(dropdown).scrollTop();
+
+                if (selectedBottom > ddBottom) {
+                    $(dropdown).scrollTop(ddScrollTop + (selectedBottom - ddBottom));
+                } else if (ddTop > selectedTop) {
+                    $(dropdown).scrollTop(ddScrollTop + (selectedTop - ddTop));
+                }
+            }
         }
 
         // Remove highlighting from an item in the results dropdown
