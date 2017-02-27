@@ -37,7 +37,7 @@
         theme: null,
         zindex: 999,
         resultsLimit: null,
-        appendToParent: true,
+        appendToParent: false,
 
         enableHTML: false,
 
