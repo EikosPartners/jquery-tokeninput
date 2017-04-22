@@ -772,6 +772,10 @@
             var token_data = $.data(token.get(0), "tokeninput");
             var callback = $(input).data("settings").onDelete;
 
+            if (token_data.readonly) {
+                return; // don't allow delete for readonly token
+            }
+
             var index = token.prevAll().length;
             if(index > selected_token_index) index--;
 
