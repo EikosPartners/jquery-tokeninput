@@ -671,7 +671,8 @@
 
         // Add a token to the token list based on user input
         function add_token (item) {
-            var callback = $(input).data("settings").onAdd;
+            var callback = $(input).data("settings").onAdd,
+                focusOnAdd = $(input).data("settings").focusOnAdd !== false;
 
             // See if the token already exists and select it if we don't want duplicates
             if(token_count > 0 && $(input).data("settings").preventDuplicates) {
@@ -688,14 +689,14 @@
                 if(found_existing_token) {
                     select_token(found_existing_token);
                     input_token.insertAfter(found_existing_token);
-                    focusWithTimeout(input_box);
+                    focusOnAdd && focusWithTimeout(input_box);
                     return;
                 }
             }
 
             // Squeeze input_box so we force no unnecessary line break
             input_box.width(1);
-            focusWithTimeout(input_box);
+            focusOnAdd && focusWithTimeout(input_box);
 
             // Insert the new tokens
             if($(input).data("settings").tokenLimit == null || token_count < $(input).data("settings").tokenLimit) {
@@ -771,6 +772,7 @@
             // Remove the id from the saved list
             var token_data = $.data(token.get(0), "tokeninput");
             var callback = $(input).data("settings").onDelete;
+            var focusOnDelete = $(input).data("settings").focusOnDelete !== false;
 
             if (token_data.readonly) {
                 return; // don't allow delete for readonly token
@@ -784,7 +786,7 @@
             selected_token = null;
 
             // Show the input box and give it focus again
-            focusWithTimeout(input_box);
+            focusOnDelete && focusWithTimeout(input_box);
 
             // Remove this token from the saved list
             saved_tokens = saved_tokens.slice(0,index).concat(saved_tokens.slice(index+1));
